@@ -1,0 +1,50 @@
+swagger 3.0
+
+http://localhost:8080/swagger-ui/index.html#/
+
+___________________________________________
+Standardowe zapytanie z repo
+public interface CarRepository extends JpaRepository<CarEntity, Long>, JpaSpecificationExecutor<CarEntity>
+carRepository.findAll(specification, PageRequest.of(pageNumber, pageSize))
+
+Hibernate:
+    select
+        carentity0_.id as id1_0_,
+        carentity0_.brand as brand2_0_,
+        carentity0_.creation_date_time as creation3_0_,
+        carentity0_.model as model4_0_,
+        carentity0_.price as price5_0_,
+        carentity0_.uuid as uuid6_0_,
+        carentity0_.year as year7_0_
+    from
+        car carentity0_
+    where
+        carentity0_.year>=100
+        and carentity0_.year<=120 limit ?
+Hibernate:
+    select
+        count(carentity0_.id) as col_0_0_
+    from
+        car carentity0_
+    where
+        carentity0_.year>=100
+        and carentity0_.year<=120
+
+___________________________________________
+Zapytanie z CriteriaNoCountDao dziedziczącej po CriteriaNoCountDao
+nie tworzy zapytania z count
+
+Hibernate:
+    select
+        carentity0_.id as id1_0_,
+        carentity0_.brand as brand2_0_,
+        carentity0_.creation_date_time as creation3_0_,
+        carentity0_.model as model4_0_,
+        carentity0_.price as price5_0_,
+        carentity0_.uuid as uuid6_0_,
+        carentity0_.year as year7_0_
+    from
+        car carentity0_
+    where
+        carentity0_.year>=100
+        and carentity0_.year<=120 limit ? offset ?
